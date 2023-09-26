@@ -27,7 +27,7 @@ class SerialHandler:
             d = self.ser.readall()
             if d != b'':
                 self.data = d
-                print(d)
+                
                     
 
 class Commands:
