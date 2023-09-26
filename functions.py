@@ -39,10 +39,11 @@ def map_range(x, in_min, in_max, out_min, out_max):
 def dec2hex(dec, range, unsigned=False):
     if unsigned is False:
         actual = int(map_range(dec, -range, range, -32768, 32767))
+        h = hex( (actual & 0xffff))
     else:
         actual = int(map_range(dec, 0, range, 0, 65535))
-   
-    h = "0x{:02x}".format(actual)
+    
+        h = "0x{:02x}".format(actual)
 
     high, low = divmod(int(h,16), 0x100)
    
@@ -50,4 +51,6 @@ def dec2hex(dec, range, unsigned=False):
 
 
     
-
+if __name__ == "__main__":
+    val = -10
+    print(dec2hex(val, 500))

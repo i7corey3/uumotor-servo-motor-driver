@@ -19,9 +19,11 @@ class Controller:
 
     def controlMotors(self):
         self.driver.setMotorParameters(1, self.motor1Param[0], self.motor1Param[1], self.motor1Param[2], self.motor1Param[3])
+        time.sleep(0.1)
         while not self.terminate:   
             if self.cmd == "changeSpeed":
                 self.driver.setMotorSpeed(1, self.motorSpeed)
+                time.sleep(0.1)
             if self.runMotor:
                 self.driver.driveMotor(1)
             self.cmd = ""
