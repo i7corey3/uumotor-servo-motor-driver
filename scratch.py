@@ -29,7 +29,7 @@ def getHexMsg(data):
     #
 
 
-ser = serial.Serial(port="COM4", baudrate=115200, timeout=1)
+ser = serial.Serial(port="/dev/ttyUSB0", baudrate=115200, timeout=1)
 dataByte = [0xEE, 0x06, 0x51, 0x00, 0x00, 0x00]
 
 msg = []
