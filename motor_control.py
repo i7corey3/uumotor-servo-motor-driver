@@ -42,7 +42,7 @@ class MotorControl:
 
 
 if __name__ == "__main__":
-    driver = MotorControl("COM4", 115200, 1)
+    driver = MotorControl("/dev/ttyUSB0", 115200, 1)
     # driver.calibrate(1)
     
     driver.setMotorParameters(1, "speed", 100, -100, 2)

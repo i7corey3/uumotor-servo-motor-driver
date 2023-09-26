@@ -13,7 +13,7 @@ class SerialHandler:
     def connect(self):
         self.ser = serial.Serial(port=self.port, baudrate=self.baud, timeout=self.timeout)
         self.terminate = False
-        threading.Thread(target=self.read, args=(), daemon=False).start()
+        threading.Thread(target=self.read, args=(), daemon=True).start()
 
     def disconnect(self):
         self.ser.close()

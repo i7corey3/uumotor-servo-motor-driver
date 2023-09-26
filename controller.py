@@ -25,6 +25,7 @@ class Controller:
             if self.runMotor:
                 self.driver.driveMotor(1)
             self.cmd = ""
+            time.sleep(0.1)
 
     def changeSpeed(self, motor, speed):
         if motor == 1:
@@ -40,7 +41,7 @@ class Controller:
             self.runMotor = True
 
 if __name__ == "__main__":
-    control = Controller("COM4", 115200, 1)
+    control = Controller("/dev/ttyUSB0", 115200, 1)
     while True:
         c = input("""
 Motor Controller Test
@@ -58,7 +59,8 @@ Type quit to quit
             elif c[0] == "changeSpeed":
                 control.changeSpeed(1, int(c[1]))
             elif c[0] == "quit":
-                control.driver.driver.terminate = True
+                control.driver.driver.disconnect
+                control.terminate = True
                 break
         except:
             pass
