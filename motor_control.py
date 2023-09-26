@@ -38,9 +38,9 @@ if __name__ == "__main__":
     # driver.calibrate(1)
     
     driver.setMotorParameters(1, "speed", 100, -100, 2)
-    while True:
-        driver.driveMotor(1, 1)
-        time.sleep(0.01)
+    
+    driver.driveMotor(1, 1)
+    # time.sleep(0.2)
         
 
         
