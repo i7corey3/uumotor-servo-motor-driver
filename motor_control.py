@@ -17,11 +17,15 @@ class MotorControl:
     def driveMotor(self, motor):
         self.driver.write(self.command.controlMotor(motor, "start"))
 
-    def setMotorParameters(self, motor, controlMode, maxSpeed, minSpeed, maxAmp):
+    def setMotorParameters(self, motor, controlMode, maxSpeed, minSpeed, maxAmp, sensor):
         self.driver.write(self.command.setControlMode(motor, controlMode))
         self.driver.write(self.command.setAccelerationMax(motor, maxSpeed))
         self.driver.write(self.command.setDecelerationMax(motor, minSpeed))
         self.driver.write(self.command.setCurrent(motor, maxAmp))
+        self.driver.write(self.command.sensorType(motor, sensor))
+        
+    def changeCurrent(self, motor, current):
+        self.driver.write(self.command.setCurrent(motor, current))
 
 
     def setMotorSpeed(self, motor, speed):
@@ -32,14 +36,59 @@ class MotorControl:
     def stopMotor(self, motor):
         self.driver.write(self.command.controlMotor(motor, "stop"))
 
+    def motorRunning(self, motor):
+        self.driver.unsigned = True
+        self.driver.decodeBits = 16
+        self.driver.write(self.command.motorRunning(motor))
+        time.sleep(0.01)
+        if self.driver.data == 1:
+            return True
+        else:
+            return False
+        
+    def readTemp(self, motor):
+        self.driver.unsigned = False
+        self.driver.decodeBits = 16
+        self.driver.write(self.command.motorTemp(motor))
+        time.sleep(0.01)
+        
+        return self.driver.data/0.1
+    
+    def readVolt(self, motor):
+        self.driver.unsigned = False
+        self.driver.decodeBits = 16
+        self.driver.write(self.command.busVoltage(motor))
+        time.sleep(0.01)
+
+        return self.driver.data*0.1
+    
+    def getAbsPosition(self, motor):
+        self.driver.isEncoder = True
+        self.driver.unsigned = False
+        self.driver.decodeBits = 32
+        self.driver.write(self.command.absolutePosition(motor))
+        time.sleep(0.01)
+
+        return self.driver.encoderCount
+
+
 
     def calibrate(self, motor):
         self.driver.write(self.command.calibrate(motor))
-        time.sleep(1)
+    
+    def calibrationStatus(self, motor):
         self.driver.write(self.command.calibrationStatus(motor))
-        time.sleep(1)
-        print(self.driver.data)
+        time.sleep(0.01)
+        
+        return self.driver.data
+        
+    def errorStatus(self, motor):
+        self.driver.unsigned = False
+        self.driver.decodeBits = 32
+        self.driver.write(self.command.errorStatus(motor))
+        time.sleep(0.01)
 
+        return self.driver.data
 
 if __name__ == "__main__":
     driver = MotorControl("/dev/ttyUSB0", 115200, 1)

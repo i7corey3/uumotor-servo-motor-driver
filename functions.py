@@ -49,8 +49,53 @@ def dec2hex(dec, range, unsigned=False):
    
     return [high, low]
 
+def checkSum(msg):
+    try:
+        crc = 0xFFFF
+        bitmsg = []
+        for i in range(0, len(msg)-2):
+            bitmsg.append(int(msg[i]))
+        crc = msg[-2] << 8 & crc | msg[-1]
+        check = calculate_crc16(bitmsg)
 
-    
+        if check == crc:
+            return True
+        else:
+            return False
+    except IndexError:
+        return False
+
+def messageDecoder(msg, bit, unsigned):
+    # print(msg, checkSum(msg), len(msg))
+    if checkSum(msg) == False:
+        return "invalid message"
+    else:
+        if bit == 16:
+            msg = msg[0:-2]
+            data = 0xFFFF
+            data = msg[-2] << 8 & data | msg[-1]
+            if unsigned == False:
+                data = (data & 0xffff)
+
+
+            return data
+        
+        elif bit == 32:
+            data = 0xFFFFFFFF
+            msg = msg[0:-2]
+            # try:
+            #     print(hex(msg[0]), hex(msg[1]), hex(msg[2]), hex(msg[3]), hex(msg[4]), hex(msg[5]), hex(msg[6]))
+            # except:
+            #     pass
+            data = (msg[-4] << 24 & data) | (msg[-3] << 16 & data) | (msg[-2] << 8 & data) | msg[-1] 
+            if unsigned == False:
+                data = (data & 0xFFFFFFFF)
+                return (data ^ 0x80000000) - 0x80000000
+            else:
+
+                return data
+
+
 if __name__ == "__main__":
     val = -10
     print(dec2hex(val, 500))
