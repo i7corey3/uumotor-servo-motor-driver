@@ -14,7 +14,7 @@ Before use please run the setup.sh script which will install all the dependencie
 
 ## How To Use
 
-An example python script is included whihc menu items that are displayed for driving, calibrating and reading encoder inputs from the driver. This example can be ran by using the following command
+An example python script is included which will display menu items that demonstrates the commands used for driving, calibrating and reading encoder inputs from the driver. This example can be ran by using the following command
 
 ```
 python3 controller.py
