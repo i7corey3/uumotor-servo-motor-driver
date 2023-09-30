@@ -14,13 +14,13 @@ Before use please run the setup.sh script which will install all the dependencie
 
 ## How To Use
 
-An example python script is included which will display a menu demonstrating the commands used for driving, calibrating and reading encoder inputs from the driver. This example can be ran by using the following command
+An example python script is included which will display a menu demonstrating the commands used for driving, calibrating and reading encoder inputs from the driver. This example can be ran by using the following command:
 
 ```
 python3 controller.py
 ```
 
 ## Disclaimer
-This interface has not been fully tested and may result in bugs and or other software issue. please refer to the manual included in this repositroy for any unforeseen issues and feel free to fix any problems with this driver. I am open to any and all recommendations.
+This interface has not been fully tested and may result in bugs and or other software issues. Please refer to the manual included in this repositroy for any unforeseen issues and feel free to fix any problems with this interface. I am open to any and all recommendations.
 
 Happy Coding!
