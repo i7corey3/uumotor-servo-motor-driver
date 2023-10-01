@@ -97,5 +97,7 @@ def messageDecoder(msg, bit, unsigned):
 
 
 if __name__ == "__main__":
-    val = -10
-    print(dec2hex(val, 500))
+    val = 20
+    v = dec2hex(val, 500, True)
+    for i in v:
+        print(hex(i))
