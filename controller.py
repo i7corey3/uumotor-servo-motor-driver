@@ -79,7 +79,7 @@ class Controller:
     def calibrateMotor(self, motor):
         if motor == 1:
             self.runMotor = False
-            self.driver.calibrate(1)
+            self.driver.calibrate(motor)
             time.sleep(2)
             self.calibrate = True
 
