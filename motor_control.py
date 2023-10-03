@@ -77,6 +77,8 @@ class MotorControl:
         self.driver.write(self.command.calibrate(motor))
     
     def calibrationStatus(self, motor):
+        self.driver.unsigned = True
+        self.driver.decodeBits = 16
         self.driver.write(self.command.calibrationStatus(motor))
         time.sleep(0.01)
         
